@@ -1,9 +1,9 @@
-import {escapeHTML as e,safeURL,safeImage,hasExamples,validateContent,safeDestination,enumLabel,logoDesigns} from './schema.js?v=20260915-pi3';
-import {mountHeroCarousel} from './hero-carousel.js?v=20260915-pi3';
-import {orderRecords} from './list-order.js?v=20260915-pi3';
-import {paperArticleURL} from './doi-import.js?v=20260915-pi3';
-import {journalMetric,keywordList,publicationSpecialNote} from './publication-data.js?v=20260915-pi3';
-import {renderAuthors,authorLegend} from './author-roles.js?v=20260915-pi3';
+import {escapeHTML as e,safeURL,safeImage,hasExamples,validateContent,safeDestination,enumLabel,logoDesigns} from './schema.js?v=20260920-contact1';
+import {mountHeroCarousel} from './hero-carousel.js?v=20260920-contact1';
+import {orderRecords} from './list-order.js?v=20260920-contact1';
+import {paperArticleURL} from './doi-import.js?v=20260920-contact1';
+import {journalMetric,keywordList,publicationSpecialNote} from './publication-data.js?v=20260920-contact1';
+import {renderAuthors,authorLegend} from './author-roles.js?v=20260920-contact1';
 let destroyHeroCarousel=null;
 let data,navPage=0,readingText='',routeKey='home',coverPage=0;
 const main=document.querySelector('#main');
@@ -124,8 +124,13 @@ function joinUs(){
  return `<section class="screen join-page">${head(menuLabel('join'),j.introduction)}<div class="join-intro"><h2>${e(j.title||'Open Positions')}</h2>${j.isExample?'<p class="page-example">Example opportunities · These listings illustrate the format and are not active recruitment announcements.</p>':''}</div><div class="position-list">${positions.length?positions.map(p=>`<article class="position-entry"><div class="position-heading"><div>${p.type?`<p class="eyebrow">${e(p.type)}</p>`:''}<h3>${e(p.title)}</h3></div><div class="position-status">${badge(p)}<span>${e(p.status)}</span></div></div><p>${e(p.description)}</p>${p.requirements?`<div class="position-requirements"><h4>Candidate profile</h4><p>${e(p.requirements)}</p></div>`:''}</article>`).join(''):'<p class="empty">There are no positions listed at the moment. Please check back for future opportunities.</p>'}</div><section class="join-apply"><h2>How to Apply</h2><p>${e(j.application||'Please contact the lab with a brief introduction and your research interests.')}</p>${email?`<div class="join-email">${emailLink(email)}</div>`:''}</section></section>`;
 }
 function contact(){
- const c=data.contact;
- return `<section class="screen contact-page">${head(menuLabel('contact'),'Contact details, location and visiting information.')}<div class="contact-overview"><section><h2>Get in Touch</h2><dl class="contact-details"><div><dt>Email</dt><dd>${c.email?emailLink(c.email):'To be added'}</dd></div><div><dt>Phone</dt><dd>${phoneLink(c.phone)}</dd></div></dl></section><section><h2>Address</h2><address>${[c.room,c.address].filter(Boolean).map(line=>`<span>${e(line)}</span>`).join('')||'Address to be added'}</address><div class="contact-links">${external(c.mapUrl,'Open map')}${external(data.site.institutionUrl,'ETRI website')}${external(data.site.github,'GitHub')}</div></section></div><div class="contact-information">${[['Getting Here',c.transport],['Visiting the Lab',c.visiting],['Research & Collaboration',c.inquiry]].filter(([,text])=>text).map(([title,text])=>`<section><h2>${title}</h2><p>${e(text)}</p></section>`).join('')}</div>${c.isExample?'<p class="page-example">Example contact details · Replace the email and confirm the lab building and room before arranging a visit.</p>':''}</section>`;
+ const c=data.contact,p=data.professor;
+ const address=[c.room,c.address].map(value=>String(value||'').trim()).filter(Boolean);
+ const query=String(c.mapQuery||'').trim()||address.join(', ');
+ const mapSource=query?`https://www.google.com/maps?q=${encodeURIComponent(query)}&z=17&output=embed`:'';
+ const mapURL=safeURL(c.mapUrl)||(query?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`:'');
+ const notes=[['Getting Here',c.transport],['Visiting the Office',c.visiting]].filter(([,text])=>text?.trim());
+ return `<section class="screen contact-page">${head(menuLabel('contact'),'Office contact and location.')}<div class="contact-location-grid${mapSource?'':' contact-location-no-map'}"><section class="contact-office"><h2>Office</h2>${p.name?`<p class="contact-pi-name">${e(p.name)}</p>`:''}<dl class="contact-office-details"><div><dt>Email</dt><dd>${c.email?emailLink(c.email):'To be added'}</dd></div><div><dt>Phone</dt><dd>${phoneLink(c.phone)}</dd></div><div><dt>Address</dt><dd><address>${address.map(line=>`<span>${e(line)}</span>`).join('')||'Address to be added'}</address></dd></div>${safeURL(p.scholar)?`<div><dt>Research profile</dt><dd>${external(p.scholar,'Google Scholar')}</dd></div>`:''}</dl>${safeURL(data.site.institutionUrl)?`<div class="contact-links">${external(data.site.institutionUrl,'ETRI website')}</div>`:''}${notes.map(([title,text])=>`<section class="contact-visit"><h3>${e(title)}</h3><p>${e(text)}</p></section>`).join('')}</section>${mapSource?`<figure class="contact-map"><iframe src="${e(mapSource)}" title="${e('Google Maps — '+(c.room||'office location'))}" width="640" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><figcaption class="contact-map-caption">${c.room?`<span>${e(c.room)}</span>`:''}${external(mapURL,'Open in Google Maps')}</figcaption></figure>`:''}</div>${c.isExample?'<p class="page-example">Example contact details · Replace the email and confirm the lab building and room before arranging a visit.</p>':''}</section>`;
 }
 function detail(kind,id){
  const item=data[kind]?.find(p=>p.id===id);if(!item)return missing();let text='',links='',meta='',side='';

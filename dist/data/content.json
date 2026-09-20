@@ -2501,14 +2501,15 @@
     }
   ],
   "contact": {
-    "email": "lab@example.org",
-    "phone": "",
-    "address": "ETRI headquarters\n218 Gajeong-ro, Yuseong-gu, Daejeon, 34129, Republic of Korea",
-    "room": "",
-    "transport": "Refer to the ETRI website for campus directions. Please confirm the lab building and room before visiting.",
+    "email": "doshin@etri.re.kr",
+    "phone": "042-860-1024",
+    "address": "218 Gajeong-ro, Yuseong-gu, Daejeon 34129, Republic of Korea\n대전광역시 유성구 가정로 218",
+    "room": "Room 501, Building 3, ETRI (ETRI 3동 건물 501호)",
+    "transport": "",
     "visiting": "Please email to arrange a visit. Include the purpose of your visit and your preferred date and time.",
-    "inquiry": "For research collaboration or technical inquiries, send a short description of your interests, proposed work and preferred contact details.",
-    "mapUrl": "",
-    "isExample": true
+    "inquiry": "",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=%ED%95%9C%EA%B5%AD%EC%A0%84%EC%9E%90%ED%86%B5%EC%8B%A0%EC%97%B0%EA%B5%AC%EC%9B%90%203%EB%8F%99%2C%20%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EA%B0%80%EC%A0%95%EB%A1%9C%20218",
+    "isExample": false,
+    "mapQuery": "한국전자통신연구원 3동, 대전광역시 유성구 가정로 218"
   }
 }
