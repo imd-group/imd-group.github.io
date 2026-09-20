@@ -1,9 +1,9 @@
-import {escapeHTML as e,safeURL,safeImage,hasExamples,validateContent,safeDestination,enumLabel,logoDesigns} from './schema.js?v=20260920-contact1';
-import {mountHeroCarousel} from './hero-carousel.js?v=20260920-contact1';
-import {orderRecords} from './list-order.js?v=20260920-contact1';
-import {paperArticleURL} from './doi-import.js?v=20260920-contact1';
-import {journalMetric,keywordList,publicationSpecialNote} from './publication-data.js?v=20260920-contact1';
-import {renderAuthors,authorLegend} from './author-roles.js?v=20260920-contact1';
+import {escapeHTML as e,safeURL,safeImage,hasExamples,validateContent,safeDestination,enumLabel,logoDesigns} from './schema.js?v=20260920-contact3';
+import {mountHeroCarousel} from './hero-carousel.js?v=20260920-contact3';
+import {orderRecords} from './list-order.js?v=20260920-contact3';
+import {paperArticleURL} from './doi-import.js?v=20260920-contact3';
+import {journalMetric,keywordList,publicationSpecialNote} from './publication-data.js?v=20260920-contact3';
+import {renderAuthors,authorLegend} from './author-roles.js?v=20260920-contact3';
 let destroyHeroCarousel=null;
 let data,navPage=0,readingText='',routeKey='home',coverPage=0;
 const main=document.querySelector('#main');
@@ -127,10 +127,10 @@ function contact(){
  const c=data.contact,p=data.professor;
  const address=[c.room,c.address].map(value=>String(value||'').trim()).filter(Boolean);
  const query=String(c.mapQuery||'').trim()||address.join(', ');
- const mapSource=query?`https://www.google.com/maps?q=${encodeURIComponent(query)}&z=17&output=embed`:'';
- const mapURL=safeURL(c.mapUrl)||(query?`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`:'');
- const notes=[['Getting Here',c.transport],['Visiting the Office',c.visiting]].filter(([,text])=>text?.trim());
- return `<section class="screen contact-page">${head(menuLabel('contact'),'Office contact and location.')}<div class="contact-location-grid${mapSource?'':' contact-location-no-map'}"><section class="contact-office"><h2>Office</h2>${p.name?`<p class="contact-pi-name">${e(p.name)}</p>`:''}<dl class="contact-office-details"><div><dt>Email</dt><dd>${c.email?emailLink(c.email):'To be added'}</dd></div><div><dt>Phone</dt><dd>${phoneLink(c.phone)}</dd></div><div><dt>Address</dt><dd><address>${address.map(line=>`<span>${e(line)}</span>`).join('')||'Address to be added'}</address></dd></div>${safeURL(p.scholar)?`<div><dt>Research profile</dt><dd>${external(p.scholar,'Google Scholar')}</dd></div>`:''}</dl>${safeURL(data.site.institutionUrl)?`<div class="contact-links">${external(data.site.institutionUrl,'ETRI website')}</div>`:''}${notes.map(([title,text])=>`<section class="contact-visit"><h3>${e(title)}</h3><p>${e(text)}</p></section>`).join('')}</section>${mapSource?`<figure class="contact-map"><iframe src="${e(mapSource)}" title="${e('Google Maps — '+(c.room||'office location'))}" width="640" height="450" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><figcaption class="contact-map-caption">${c.room?`<span>${e(c.room)}</span>`:''}${external(mapURL,'Open in Google Maps')}</figcaption></figure>`:''}</div>${c.isExample?'<p class="page-example">Example contact details · Replace the email and confirm the lab building and room before arranging a visit.</p>':''}</section>`;
+ const providedMapURL=safeURL(c.mapUrl);
+ const mapURL=providedMapURL&&['map.naver.com','naver.me'].includes(new URL(providedMapURL).hostname)?providedMapURL:query?`https://map.naver.com/p/search/${encodeURIComponent(query)}`:'https://map.naver.com/';
+ const visit=[c.visiting,c.visitingKo].some(value=>String(value||'').trim())?`<section class="contact-visit contact-visit-top"><h2>Visiting the Office / 방문 안내</h2>${c.visiting?`<p lang="en">${e(c.visiting)}</p>`:''}${c.visitingKo?`<p lang="ko">${e(c.visitingKo)}</p>`:''}</section>`:'';
+ return `<section class="screen contact-page">${head(menuLabel('contact'),'Office contact and location.')}${visit}<div class="contact-location-grid contact-location-no-map"><section class="contact-office"><h2>Office</h2>${p.name?`<p class="contact-pi-name">${e(p.name)}</p>`:''}<dl class="contact-office-details"><div><dt>Email</dt><dd>${c.email?emailLink(c.email):'To be added'}</dd></div><div><dt>Phone</dt><dd>${phoneLink(c.phone)}</dd></div><div><dt>Address</dt><dd><address>${address.map(line=>`<span>${e(line)}</span>`).join('')||'Address to be added'}</address></dd></div></dl><div class="contact-links">${external(mapURL,'Open in NAVER Map / 네이버 지도 열기')}</div>${c.transport?.trim()?`<section class="contact-visit"><h3>Getting Here</h3><p>${e(c.transport)}</p></section>`:''}</section></div>${c.isExample?'<p class="page-example">Example contact details · Replace the email and confirm the address before arranging a visit.</p>':''}</section>`;
 }
 function detail(kind,id){
  const item=data[kind]?.find(p=>p.id===id);if(!item)return missing();let text='',links='',meta='',side='';

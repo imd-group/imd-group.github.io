@@ -1,8 +1,8 @@
-import {escapeHTML as e,safeImage,destinationOptions,enumLabel} from './schema.js?v=20260920-contact1';
-import {journalMetric,publicationSpecialNote} from './publication-data.js?v=20260920-contact1';
-import {renderAuthors,authorLegend} from './author-roles.js?v=20260920-contact1';
-import {textPages} from './pagination.js?v=20260920-contact1';
-import {orderRecords} from './list-order.js?v=20260920-contact1';
+import {escapeHTML as e,safeImage,destinationOptions,enumLabel} from './schema.js?v=20260920-contact3';
+import {journalMetric,publicationSpecialNote} from './publication-data.js?v=20260920-contact3';
+import {renderAuthors,authorLegend} from './author-roles.js?v=20260920-contact3';
+import {textPages} from './pagination.js?v=20260920-contact3';
+import {orderRecords} from './list-order.js?v=20260920-contact3';
 export function liveCardData(section,record,site,content){
  const r=record||{},title=r.question||r.label||r.title||r.name||r.headline||'Untitled draft';
  const sections={site:'LAB SETTINGS',home:'HOME INTRO',homeSlides:'HOME IMAGES',homeNotes:'HOME NOTES',navigation:'NAVIGATION',pages:'EXTRA PAGES',professor:'PI',research:'RESEARCH LENS',people:'MEMBERS',covers:'COVER GALLERY',publications:'PAPERS',patents:'PATENTS',news:'LAB NOTES',events:'ARCHIVED EVENTS',join:'JOIN US',positions:'OPEN POSITIONS',contact:'CONTACT'};
@@ -21,7 +21,7 @@ export function liveCardData(section,record,site,content){
  else if(section==='events'){text=[r.time,r.location,r.description,r.link].filter(Boolean).join('\n\n');subtitle=[r.date,r.endDate,enumLabel(r.category)].filter(Boolean).join(' · ');}
  else if(section==='join'){text=[r.introduction,r.application,r.email||content?.contact?.email].filter(Boolean).join('\n\n');subtitle='Open positions and application information';}
  else if(section==='positions'){text=[r.description,r.requirements,r.visible?'Visible on Join Us':'Hidden from Join Us'].filter(Boolean).join('\n\n');subtitle=[r.type,r.status].filter(Boolean).join(' · ');}
- else if(section==='contact'){text=[r.email,r.phone,r.room,r.address,r.transport,r.visiting,r.mapQuery,r.mapUrl].filter(Boolean).join('\n\n');subtitle=site?.name||'';}
+ else if(section==='contact'){text=[r.visiting,r.visitingKo,r.email,r.phone,r.room,r.address,r.transport,r.mapQuery,r.mapUrl].filter(Boolean).join('\n\n');subtitle=site?.name||'';}
  return {title:section==='contact'?'Office':title,kicker:sections[section]||section,subtitle,text:text||'Your content will appear here as you type.',authorsHTML:section==='publications'?renderAuthors(r):'',authorsLegend:section==='publications'?authorLegend(r):'',image,artPanel:section==='covers'&&r.image==='assets/cover-artworks.webp'&&/^(?:[1-9]|10)$/.test(r.artPanel)?Number(r.artPanel)-1:-1,isExample:!!r.isExample};
 }
 export function renderLiveCard(root,section,record,site,content){

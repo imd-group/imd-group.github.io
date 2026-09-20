@@ -158,7 +158,7 @@
     "orcid": "",
     "isExample": false,
     "affiliation": "Electronics and Telecommunications Research Institute (ETRI)\nFuture Electronics Convergence Materials Research Section (Battery part)\n\nUniversity of Science and Technology (UST)",
-    "address": "Room 501, Building 3, ETRI (ETRI 3동 건물 501호)"
+    "address": "218 Gajeong-ro, Yuseong-gu, Daejeon 34129, Republic of Korea\n(대전광역시 유성구 가정로 218)"
   },
   "research": [
     {
@@ -2503,13 +2503,14 @@
   "contact": {
     "email": "doshin@etri.re.kr",
     "phone": "042-860-1024",
-    "address": "218 Gajeong-ro, Yuseong-gu, Daejeon 34129, Republic of Korea\n대전광역시 유성구 가정로 218",
-    "room": "Room 501, Building 3, ETRI (ETRI 3동 건물 501호)",
+    "address": "218 Gajeong-ro, Yuseong-gu, Daejeon 34129, Republic of Korea\n(대전광역시 유성구 가정로 218)",
+    "room": "",
     "transport": "",
     "visiting": "Please email to arrange a visit. Include the purpose of your visit and your preferred date and time.",
     "inquiry": "",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=%ED%95%9C%EA%B5%AD%EC%A0%84%EC%9E%90%ED%86%B5%EC%8B%A0%EC%97%B0%EA%B5%AC%EC%9B%90%203%EB%8F%99%2C%20%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EA%B0%80%EC%A0%95%EB%A1%9C%20218",
+    "mapUrl": "https://map.naver.com/p/search/%ED%95%9C%EA%B5%AD%EC%A0%84%EC%9E%90%ED%86%B5%EC%8B%A0%EC%97%B0%EA%B5%AC%EC%9B%90%20%EB%8C%80%EC%A0%84%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%9C%A0%EC%84%B1%EA%B5%AC%20%EA%B0%80%EC%A0%95%EB%A1%9C%20218",
     "isExample": false,
-    "mapQuery": "한국전자통신연구원 3동, 대전광역시 유성구 가정로 218"
+    "mapQuery": "한국전자통신연구원 대전광역시 유성구 가정로 218",
+    "visitingKo": "방문을 원하시면 사전에 이메일로 일정을 조율해 주세요. 방문 목적과 희망 날짜·시간을 함께 알려주시면 감사하겠습니다."
   }
 }
