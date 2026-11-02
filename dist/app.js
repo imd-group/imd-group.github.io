@@ -95,7 +95,7 @@ function about(){
 }
 function footerMarkup(){
  const c=data.contact,s=data.site;
- return `<div class="footer-inner"><div class="footer-simple-top"><div class="footer-lab"><strong>${e(s.shortName||'IMD Lab')}</strong><span>${e(s.nameEn)}</span></div><address>${[c.room,c.address].filter(Boolean).map(line=>`<span>${e(line)}</span>`).join('')}</address><div class="footer-simple-contact">${c.email?emailLink(c.email):'<span>Email to be added</span>'}${c.phone?phoneLink(c.phone):''}${external(s.institutionUrl,'ETRI')}</div></div><div class="footer-bottom"><p><span id="copyright">© ${new Date().getFullYear()}</span> <span id="footer-name">${e(s.shortName||s.nameEn)}</span><span class="footer-rights">All rights reserved.</span></p><a class="footer-edit" href="editor.html">Edit content</a></div><p class="example-notice" id="example-notice">${hasExamples(data)?'Example content · Replace marked entries with verified information.':''}</p></div>`;
+ return `<div class="footer-inner"><div class="footer-simple-top"><div class="footer-lab"><strong>${e(s.shortName||'IMD Lab')}</strong><span>${e(s.nameEn)}</span></div><address>${[c.room,c.address].filter(Boolean).map(line=>`<span>${e(line)}</span>`).join('')}</address><div class="footer-simple-contact">${c.email?emailLink(c.email):'<span>Email to be added</span>'}${c.phone?phoneLink(c.phone):''}${external(s.institutionUrl,'ETRI')}</div></div><div class="footer-bottom"><p><span id="copyright">© ${new Date().getFullYear()}</span> <span id="footer-name">${e(s.shortName||s.nameEn)}</span><span class="footer-rights">All rights reserved.</span></p></div><p class="example-notice" id="example-notice">${hasExamples(data)?'Example content · Replace marked entries with verified information.':''}</p></div>`;
 }
 function members(){
  const groups=[['Current Members',data.people.filter(p=>p.membership!=='Alumni')],['Alumni',data.people.filter(p=>p.membership==='Alumni')]];
@@ -179,3 +179,4 @@ if(isPreview&&window.opener){let received=false;window.addEventListener('message
 
 window.addEventListener('pagehide',()=>{destroyHeroCarousel?.();destroyHeroCarousel=null;});
 window.addEventListener('pageshow',event=>{if(event.persisted&&data)startHeroCarousel();});
+
